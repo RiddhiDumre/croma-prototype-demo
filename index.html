@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Croma · Electronics Online & In Store | A TATA Enterprise</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html, body { margin: 0; padding: 0; background: #E6E5E0; }
+    body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; color: #17181A; }
+    a { color: #00846F; text-decoration: none; }
+    a:hover { color: #005A4B; }
+    ::-webkit-scrollbar { height: 0; width: 0; display: none; }
+
+    :root {
+      --croma-teal: #00E9BF;
+      --croma-teal-dark: #00846F;
+      --croma-teal-light: #E6FDF9;
+      --croma-red: #E11D48;
+      --border-color: #E4E3DF;
+      --bg-page: #F6F5F2;
+      --bg-white: #FFFFFF;
+      --text-muted: #6D6F73;
+      
+      /* Light Elegant Card Shadows */
+      --card-shadow: 0 2px 8px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
+      --card-shadow-hover: 0 6px 16px rgba(15, 23, 42, 0.09);
+      --card-shadow-lg: 0 4px 16px rgba(15, 23, 42, 0.07);
+    }
+
+    /* Presentation Header Toolbar */
+    .pitch-toolbar {
+      width: 100%;
+      background: #14181F;
+      border-bottom: 1px solid #232A36;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #94A3B8;
+      font-size: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .pitch-brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 233, 191, 0.12);
+      border: 1px solid rgba(0, 233, 191, 0.3);
+      color: var(--croma-teal);
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 11px;
+    }
+
+    .pitch-brand-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--croma-teal);
+      box-shadow: 0 0 6px var(--croma-teal);
+    }
+
+    .pitch-view-toggle {
+      display: flex;
+      align-items: center;
+      background: #0A0D14;
+      border: 1px solid #232A36;
+      border-radius: 999px;
+      padding: 2px;
+    }
+
+    .toggle-opt-btn {
+      background: transparent;
+      border: none;
+      color: #64748B;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .toggle-opt-btn.active {
+      background: #1E293B;
+      color: #FFFFFF;
+    }
+
+    /* Layout Wrapper */
+    .wireframe-wrapper {
+      min-height: 100vh;
+      background: #E6E5E0;
+      display: flex;
+      justify-content: center;
+      padding: 18px 0 44px;
+      transition: all 0.3s ease;
+    }
+
+    .wireframe-phone {
+      width: 100%;
+      max-width: 440px;
+      background: #F6F5F2;
+      position: relative;
+      color: #17181A;
+      box-shadow: 0 14px 44px rgba(0, 0, 0, 0.14);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    body.view-fullscreen .wireframe-wrapper {
+      padding: 0;
+    }
+
+    body.view-fullscreen .wireframe-phone {
+      max-width: 480px;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    /* Product Image Card (Deals & Bestsellers) */
+    .deal-img-box {
+      position: relative;
+      border: none;
+      border-radius: 12px;
+      background: #FFFFFF;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 10px;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .deal-img-box img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      transition: transform 0.25s ease;
+    }
+
+    .deal-img-box:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .deal-img-box:hover img {
+      transform: scale(1.04);
+    }
+
+    /* Heart Wishlist */
+    .wish-heart {
+      position: absolute;
+      top: 7px;
+      right: 7px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.92);
+      border: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #6D6F73;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .wish-heart.active {
+      color: #E11D48;
+      background: #FFF1F2;
+      box-shadow: 0 2px 8px rgba(225, 29, 72, 0.2);
+    }
+
+    /* Apple Style Floating Category Items */
+    .apple-cat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      cursor: pointer;
+      padding: 6px 2px 4px;
+      position: relative;
+      user-select: none;
+    }
+
+    .apple-cat-stage {
+      width: 100%;
+      height: 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      position: relative;
+    }
+
+    .apple-cat-stage img {
+      max-width: 88%;
+      max-height: 52px;
+      object-fit: contain;
+      position: relative;
+      z-index: 2;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .apple-cat-ground-shadow {
+      width: 48px;
+      height: 6px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(15, 23, 42, 0.20) 0%, rgba(15, 23, 42, 0.05) 55%, transparent 75%);
+      margin-top: 2px;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .apple-cat-item:hover .apple-cat-stage img,
+    .apple-cat-item:active .apple-cat-stage img {
+      transform: translateY(-5px) scale(1.06);
+    }
+
+    .apple-cat-item:hover .apple-cat-ground-shadow,
+    .apple-cat-item:active .apple-cat-ground-shadow {
+      transform: scale(0.82);
+      opacity: 0.45;
+    }
+
+    .apple-cat-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #17181A;
+      text-align: center;
+      letter-spacing: -0.015em;
+      margin-top: 6px;
+      line-height: 1.25;
+      width: 100%;
+    }
+
+    /* Truncation utility classes */
+    .text-truncate-1 {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .text-truncate-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.32;
+    }
+
+    /* Section Spacing */
+    .section-block {
+      background: #FFFFFF;
+      margin-top: 10px;
+      padding: 18px 16px;
+    }
+
+    .section-block-scroll {
+      background: #FFFFFF;
+      margin-top: 10px;
+      padding: 18px 0 20px;
+    }
+
+    /* Toast */
+    .toast-pill {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #17181A;
+      color: #FFFFFF;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast-pill.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .toast-pill::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--croma-teal);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Presentation Toolbar -->
+  <div class="pitch-toolbar">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <div class="pitch-brand-badge" style="display: flex; align-items: center; gap: 8px; padding: 5px 12px; background: rgba(0, 233, 191, 0.08); border: 1px solid rgba(0, 233, 191, 0.25);">
+        <img src="assets/croma_logo_white.png" alt="Croma" style="height: 14px; width: auto; object-fit: contain; display: block;">
+        <span style="font-size: 10px; letter-spacing: 0.06em; color: var(--croma-teal);">PITCH PROTOTYPE</span>
+      </div>
+      <span style="font-size: 11px; color: #64748B;">Official Brand Assets · High Fidelity Look & Feel</span>
+    </div>
+    <div class="pitch-view-toggle">
+      <button class="toggle-opt-btn active" id="btnPhone" onclick="setView('phone')">📱 Mobile</button>
+      <button class="toggle-opt-btn" id="btnFull" onclick="setView('full')">🖥️ Fullscreen</button>
+    </div>
+  </div>
+
+  <!-- EXACT WIREFRAME LAYOUT -->
+  <div class="wireframe-wrapper">
+    <div class="wireframe-phone" id="phoneContainer">
+
+      <!-- STICKY HEADER -->
+      <div style="position: sticky; top: 0; z-index: 40; background: #ffffff; border-bottom: 1px solid #eae9e4;">
+        
+        <!-- Top bar: Hamburger, Logo, Account, Wishlist, Cart -->
+        <div style="display: flex; align-items: center; gap: 14px; padding: 11px 16px 9px;">
+          <!-- Hamburger -->
+          <div style="display: flex; flex-direction: column; gap: 4px; padding: 2px 0; cursor: pointer;" onclick="showToast('Menu: Categories & Brands')">
+            <div style="width: 19px; height: 2px; background: #17181a; border-radius: 1px;"></div>
+            <div style="width: 19px; height: 2px; background: #17181a; border-radius: 1px;"></div>
+            <div style="width: 13px; height: 2px; background: #17181a; border-radius: 1px;"></div>
+          </div>
+          
+          <!-- Official Croma Logo -->
+          <div style="cursor: pointer; display: flex; align-items: center;" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <img src="assets/croma_logo_dark.png?v=3" alt="Croma" style="height: 22px; width: auto; object-fit: contain; display: block;">
+          </div>
+
+          <div style="flex: 1;"></div>
+
+          <!-- Icons: Account, Wishlist, Cart -->
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer;" onclick="showToast('Account: Orders & Profile')">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#17181a" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <div style="font-size: 8.5px; font-weight: 700; color: #6d6f73;">Account</div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer;" onclick="showToast('Wishlist: 1 item saved')">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#17181a" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              <div style="font-size: 8.5px; font-weight: 700; color: #6d6f73;">Wishlist</div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer;" onclick="toggleCartDrawer()">
+              <div style="position: relative;">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#17181a" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                <div id="cartBadge" style="position: absolute; top: -6px; right: -7px; min-width: 15px; height: 15px; border-radius: 8px; background: #00846F; color: #fff; font-size: 9px; font-weight: 700; display: flex; align-items: center; justify-content: center;">2</div>
+              </div>
+              <div style="font-size: 8.5px; font-weight: 700; color: #6d6f73;">Cart</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div style="padding: 0 16px 9px;">
+          <div style="display: flex; align-items: center; gap: 8px; background: #f1f0ec; border-radius: 10px; padding: 8px 12px; cursor: pointer;" onclick="showToast('Search active: Type TVs, ACs, phones...')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8a8c90" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <div style="font-size: 12.5px; color: #8a8c90; font-weight: 500;" id="searchTypeBar">Search TVs, ACs, phones, appliances</div>
+          </div>
+        </div>
+
+        <!-- Substrip: My Store & My Tech -->
+        <div style="display: flex; align-items: center; gap: 10px; padding: 7px 16px 8px; border-top: 1px solid #f0efe9; background: #fbfaf8;">
+          <div onclick="toggleStoreModal()" style="display: flex; align-items: center; gap: 7px; cursor: pointer; min-width: 0;">
+            <div style="width: 12px; height: 12px; flex: 0 0 auto; border: 1.5px solid #00846F; border-radius: 50% 50% 50% 0; transform: rotate(-45deg);"></div>
+            <div style="font-size: 10.5px; color: #6d6f73; font-weight: 600; flex: 0 0 auto;">My Store</div>
+            <div id="storeNameText" style="font-size: 11px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #17181a;">Andheri West, 400053</div>
+            <div style="font-size: 10.5px; color: #8a8c90; flex: 0 0 auto;">▾</div>
+          </div>
+          <div style="flex: 1;"></div>
+          <div onclick="showToast('Opening My Tech Device Locker')" style="display: flex; align-items: center; gap: 5px; flex: 0 0 auto; background: #17181a; color: #fff; border-radius: 999px; padding: 5px 11px; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.12);">
+            <div style="width: 5px; height: 5px; border-radius: 50%; background: var(--croma-teal);"></div>
+            <div style="font-size: 10px; font-weight: 700; letter-spacing: 0.01em;">My Tech</div>
+          </div>
+        </div>
+
+        <!-- Store Dropdown Modal -->
+        <div id="storeDropdown" style="display: none; position: absolute; left: 12px; right: 12px; top: 100%; margin-top: 6px; background: #ffffff; border-radius: 14px; box-shadow: 0 16px 36px rgba(0,0,0,0.14); padding: 14px 16px; z-index: 50;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="font-size: 14.5px; font-weight: 800;">Andheri West, 400053</div>
+            <div onclick="toggleStoreModal()" style="font-size: 16px; color: #8a8c90; cursor: pointer; line-height: 1; padding: 2px 6px;">×</div>
+          </div>
+          <div style="font-size: 11.5px; color: #6d6f73; margin-top: 4px; line-height: 1.45;">Infiniti Mall, 2nd Floor, Link Road · 1.4 km</div>
+          <div style="font-size: 11.5px; font-weight: 700; color: #00846F; margin-top: 6px;">Open until 10 pm · 2 Hour Pickup Ready</div>
+          <div style="display: flex; gap: 8px; margin-top: 12px;">
+            <div onclick="showToast('Store switcher opened')" style="flex: 1; text-align: center; background: #F8FAFC; color: #00846F; border-radius: 8px; padding: 8px; font-size: 11.5px; font-weight: 700; cursor: pointer;">Change store</div>
+            <div onclick="showToast('Opening Google Maps navigation')" style="flex: 1; text-align: center; background: #17181a; color: #fff; border-radius: 8px; padding: 8px; font-size: 11.5px; font-weight: 700; cursor: pointer;">Get directions</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- CAROUSEL (PURE COMMERCIAL PRODUCT PHOTOGRAPHY · ZERO TEXT) -->
+      <div style="background: #ffffff; padding: 14px 0 14px;">
+        <div style="overflow: hidden; padding: 0 16px;">
+          <div id="carouselSlider" style="display: flex; gap: 12px; transition: transform 420ms cubic-bezier(.4,0,.2,1); transform: translateX(0);">
+            
+            <!-- Slide 0: 4K Smart TV & Entertainment -->
+            <div style="flex: 0 0 100%; border-radius: 14px; overflow: hidden; border: 1px solid #e4e3df; background: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.04);">
+              <div style="width: 100%; aspect-ratio: 16 / 9; position: relative; overflow: hidden; background: #11141a;">
+                <img src="assets/ad_tv_nanobanana.jpg?v=6" alt="4K Smart TV & Entertainment" style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;">
+                <div style="position: absolute; top: 10px; right: 10px; background: rgba(0, 181, 148, 0.95); color: #0a1f1a; font-size: 9px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 8px; border-radius: 4px;">FESTIVE SALE</div>
+              </div>
+              <div style="padding: 13px 15px 15px; background: #ffffff;">
+                <div style="font-size: 17px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; color: #17181a;">Up to 65% off this Diwali</div>
+                <div style="font-size: 11.5px; color: #55575d; margin-top: 4px; font-weight: 500; line-height: 1.45;">Extra ₹10,000 off on HDFC & ICICI cards + Free appliance setup</div>
+                <div style="display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; background: #17181a; color: #fff; font-size: 11.5px; font-weight: 700; padding: 8px 15px; border-radius: 7px; cursor: pointer;" onclick="showToast('Shop Diwali Sale')">
+                  <span>Shop the sale</span>
+                  <span style="color: var(--croma-teal); font-size: 13px;">→</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 1: Flagship Titanium Smartphone -->
+            <div style="flex: 0 0 100%; border-radius: 14px; overflow: hidden; border: 1px solid #e4e3df; background: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.04);">
+              <div style="width: 100%; aspect-ratio: 16 / 9; position: relative; overflow: hidden; background: #0b0d11;">
+                <img src="assets/ad_phone_nanobanana.jpg?v=6" alt="Flagship Titanium Smartphone" style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;">
+                <div style="position: absolute; top: 10px; right: 10px; background: rgba(0, 233, 191, 0.95); color: #071714; font-size: 9px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 8px; border-radius: 4px;">NEW LAUNCH</div>
+              </div>
+              <div style="padding: 13px 15px 15px; background: #ffffff;">
+                <div style="font-size: 17px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; color: #17181a;">Flagship Titanium Series</div>
+                <div style="font-size: 11.5px; color: #55575d; margin-top: 4px; font-weight: 500; line-height: 1.45;">Trade in your old phone for up to ₹12,000 instant exchange bonus</div>
+                <div style="display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; background: #17181a; color: #fff; font-size: 11.5px; font-weight: 700; padding: 8px 15px; border-radius: 7px; cursor: pointer;" onclick="showToast('Pre book Flagship')">
+                  <span>Pre book now</span>
+                  <span style="color: var(--croma-teal); font-size: 13px;">→</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2: Smart Inverter ACs & Installation -->
+            <div style="flex: 0 0 100%; border-radius: 14px; overflow: hidden; border: 1px solid #e4e3df; background: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.04);">
+              <div style="width: 100%; aspect-ratio: 16 / 9; position: relative; overflow: hidden; background: #fbfbf9;">
+                <img src="assets/ad_ac_nanobanana.jpg?v=6" alt="Smart Inverter ACs & Installation" style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;">
+                <div style="position: absolute; top: 10px; right: 10px; background: rgba(0, 181, 148, 0.95); color: #0a1f1a; font-size: 9px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 8px; border-radius: 4px;">SUMMER DEALS</div>
+              </div>
+              <div style="padding: 13px 15px 15px; background: #ffffff;">
+                <div style="font-size: 17px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; color: #17181a;">ACs from ₹24,990</div>
+                <div style="font-size: 11.5px; color: #55575d; margin-top: 4px; font-weight: 500; line-height: 1.45;">5 Star energy savers with rapid cooling + free 48 hr setup</div>
+                <div style="display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; background: #17181a; color: #fff; font-size: 11.5px; font-weight: 700; padding: 8px 15px; border-radius: 7px; cursor: pointer;" onclick="showToast('Explore AC Deals')">
+                  <span>See AC deals</span>
+                  <span style="color: var(--croma-teal); font-size: 13px;">→</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3: Modern Kitchen & Appliance Care -->
+            <div style="flex: 0 0 100%; border-radius: 14px; overflow: hidden; border: 1px solid #e4e3df; background: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.04);">
+              <div style="width: 100%; aspect-ratio: 16 / 9; position: relative; overflow: hidden; background: #fdfbf7;">
+                <img src="assets/ad_kitchen_nanobanana.jpg?v=6" alt="Modern Kitchen & Appliance Care" style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;">
+                <div style="position: absolute; top: 10px; right: 10px; background: rgba(0, 181, 148, 0.95); color: #0a1f1a; font-size: 9px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 8px; border-radius: 4px;">CROMA CARE</div>
+              </div>
+              <div style="padding: 13px 15px 15px; background: #ffffff;">
+                <div style="font-size: 17px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; color: #17181a;">One relationship, every brand</div>
+                <div style="font-size: 11.5px; color: #55575d; margin-top: 4px; font-weight: 500; line-height: 1.45;">Priority repairs, annual tech inspection, and coverage for all appliances</div>
+                <div style="display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; background: #17181a; color: #fff; font-size: 11.5px; font-weight: 700; padding: 8px 15px; border-radius: 7px; cursor: pointer;" onclick="showToast('Join One Croma')">
+                  <span>Join One Croma</span>
+                  <span style="color: var(--croma-teal); font-size: 13px;">→</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        
+        <!-- Dots -->
+        <div style="display: flex; justify-content: center; gap: 5px; margin-top: 10px;">
+          <div id="dot0" onclick="setSlide(0)" style="height: 4px; border-radius: 2px; cursor: pointer; width: 18px; background: #17181a; transition: all 0.25s;"></div>
+          <div id="dot1" onclick="setSlide(1)" style="height: 4px; border-radius: 2px; cursor: pointer; width: 5px; background: #d5d4cf; transition: all 0.25s;"></div>
+          <div id="dot2" onclick="setSlide(2)" style="height: 4px; border-radius: 2px; cursor: pointer; width: 5px; background: #d5d4cf; transition: all 0.25s;"></div>
+          <div id="dot3" onclick="setSlide(3)" style="height: 4px; border-radius: 2px; cursor: pointer; width: 5px; background: #d5d4cf; transition: all 0.25s;"></div>
+        </div>
+      </div>
+
+      <!-- CATEGORIES: GENUINE APPLE FLOATING HARDWARE -->
+      <div class="section-block">
+        <div style="font-size: 15px; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 18px;">Shop by category</div>
+        
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px 8px;">
+          
+          <!-- 1. Televisions -->
+          <div class="apple-cat-item" onclick="pickCategory('Television')">
+            <div class="apple-cat-stage">
+              <img src="assets/smart_tv_float.png" alt="Televisions">
+              <div class="apple-cat-ground-shadow" style="width: 58px;"></div>
+            </div>
+            <div class="apple-cat-title">Televisions</div>
+          </div>
+
+          <!-- 2. Mobiles -->
+          <div class="apple-cat-item" onclick="pickCategory('Mobiles')">
+            <div class="apple-cat-stage">
+              <img src="assets/phone_float.png" alt="Mobiles">
+              <div class="apple-cat-ground-shadow" style="width: 32px;"></div>
+            </div>
+            <div class="apple-cat-title">Mobiles</div>
+          </div>
+
+          <!-- 3. Laptops -->
+          <div class="apple-cat-item" onclick="pickCategory('Laptops & Computers')">
+            <div class="apple-cat-stage">
+              <img src="assets/laptop_float.png" alt="Laptops">
+              <div class="apple-cat-ground-shadow" style="width: 52px;"></div>
+            </div>
+            <div class="apple-cat-title">Laptops</div>
+          </div>
+
+          <!-- 4. Tablets -->
+          <div class="apple-cat-item" onclick="showToast('Browsing Tablets & iPads')">
+            <div class="apple-cat-stage">
+              <img src="assets/tablet_float.png" alt="Tablets">
+              <div class="apple-cat-ground-shadow" style="width: 44px;"></div>
+            </div>
+            <div class="apple-cat-title">Tablets</div>
+          </div>
+
+          <!-- 5. Air Conditioners -->
+          <div class="apple-cat-item" onclick="pickCategory('Air Conditioners')">
+            <div class="apple-cat-stage">
+              <img src="assets/split_ac_float.png" alt="Air Conditioners">
+              <div class="apple-cat-ground-shadow" style="width: 62px;"></div>
+            </div>
+            <div class="apple-cat-title">Air Cond.</div>
+          </div>
+
+          <!-- 6. Refrigerators -->
+          <div class="apple-cat-item" onclick="showToast('Browsing Refrigerators')">
+            <div class="apple-cat-stage">
+              <img src="assets/fridge_float.png" alt="Refrigerators">
+              <div class="apple-cat-ground-shadow" style="width: 40px;"></div>
+            </div>
+            <div class="apple-cat-title">Refrigerators</div>
+          </div>
+
+          <!-- 7. Washing Machines -->
+          <div class="apple-cat-item" onclick="showToast('Browsing Washing Machines')">
+            <div class="apple-cat-stage">
+              <img src="assets/washer_float.png" alt="Washing Machines">
+              <div class="apple-cat-ground-shadow" style="width: 42px;"></div>
+            </div>
+            <div class="apple-cat-title">Washers</div>
+          </div>
+
+          <!-- 8. Audio -->
+          <div class="apple-cat-item" onclick="showToast('Browsing Audio & Earbuds')">
+            <div class="apple-cat-stage">
+              <img src="assets/earbuds_float.png" alt="Audio">
+              <div class="apple-cat-ground-shadow" style="width: 48px;"></div>
+            </div>
+            <div class="apple-cat-title">Audio</div>
+          </div>
+
+        </div>
+        
+        <div onclick="showToast('Showing all 24 Croma departments')" style="margin-top: 20px; text-align: center; background: #F5F5F7; border-radius: 999px; padding: 10px 16px; font-size: 12px; font-weight: 700; color: #17181A; cursor: pointer; transition: background 0.2s ease;">
+          View all categories
+        </div>
+      </div>
+
+      <!-- DECISION ASSISTANT: PURE MINIMAL ARCHITECTURE -->
+      <div style="background: #ffffff; padding: 10px 16px;">
+        <div style="border-radius: 12px; background: #F8FAF9; border: 1px solid #E3ECE8; padding: 14px 14px 13px;">
+
+          <!-- Header -->
+          <div style="font-size: 15px; font-weight: 700; letter-spacing: -0.01em; color: #17181A;">Don't know what to buy?</div>
+          <div style="font-size: 11.5px; color: #5B6B66; margin-top: 2px;">Answer 3 questions to get your shortlist</div>
+
+          <!-- Minimal Sequence Breadcrumb -->
+          <div style="display: flex; align-items: center; gap: 5px; margin: 9px 0 12px; font-size: 10.5px;">
+            <span style="color: #00846F; font-weight: 700;">1. Category</span>
+            <span style="color: #A3B5AF;">›</span>
+            <span style="color: #6E807A; font-weight: 500;">2. Questions</span>
+            <span style="color: #A3B5AF;">›</span>
+            <span style="color: #6E807A; font-weight: 500;">3. Shortlist</span>
+          </div>
+
+          <!-- 6 Minimal Hairline Outline Category Tiles -->
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 12px;" id="hmcGridContainer">
+            
+            <!-- 1. TVs (Active by default) -->
+            <div class="finder-tile active" onclick="pickFinderCat(this, 'TVs')" style="height: 48px; border-radius: 7px; background: #17181A; border: 1px solid #17181A; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.15s ease; color: #00E9BF;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+              <span style="font-size: 10px; font-weight: 700; color: #ffffff; margin-top: 2px;">TVs</span>
+            </div>
+
+            <!-- 2. ACs -->
+            <div class="finder-tile" onclick="pickFinderCat(this, 'ACs')" style="height: 48px; border-radius: 7px; background: #ffffff; border: 1px solid #DFE7E4; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.15s ease; color: #40524D;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="9" rx="2"></rect>
+                <line x1="6" y1="9" x2="18" y2="9"></line>
+                <path d="M5 17c1.5 1.5 3 1.5 4.5 0s3-1.5 4.5 0 3 1.5 4.5 0"></path>
+              </svg>
+              <span style="font-size: 10px; font-weight: 600; color: #32433E; margin-top: 2px;">ACs</span>
+            </div>
+
+            <!-- 3. Laptops -->
+            <div class="finder-tile" onclick="pickFinderCat(this, 'Laptops')" style="height: 48px; border-radius: 7px; background: #ffffff; border: 1px solid #DFE7E4; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.15s ease; color: #40524D;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="12" rx="2"></rect>
+                <path d="M2 20h20"></path>
+              </svg>
+              <span style="font-size: 10px; font-weight: 600; color: #32433E; margin-top: 2px;">Laptops</span>
+            </div>
+
+            <!-- 4. Fridges -->
+            <div class="finder-tile" onclick="pickFinderCat(this, 'Fridges')" style="height: 48px; border-radius: 7px; background: #ffffff; border: 1px solid #DFE7E4; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.15s ease; color: #40524D;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="2" width="14" height="20" rx="2"></rect>
+                <line x1="5" y1="10" x2="19" y2="10"></line>
+                <line x1="9" y1="6" x2="9" y2="8"></line>
+                <line x1="9" y1="14" x2="9" y2="17"></line>
+              </svg>
+              <span style="font-size: 10px; font-weight: 600; color: #32433E; margin-top: 2px;">Fridges</span>
+            </div>
+
+            <!-- 5. Washers -->
+            <div class="finder-tile" onclick="pickFinderCat(this, 'Washers')" style="height: 48px; border-radius: 7px; background: #ffffff; border: 1px solid #DFE7E4; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.15s ease; color: #40524D;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                <circle cx="12" cy="13" r="5"></circle>
+                <line x1="7" y1="6" x2="9" y2="6"></line>
+              </svg>
+              <span style="font-size: 10px; font-weight: 600; color: #32433E; margin-top: 2px;">Washers</span>
+            </div>
+
+            <!-- 6. Phones -->
+            <div class="finder-tile" onclick="pickFinderCat(this, 'Phones')" style="height: 48px; border-radius: 7px; background: #ffffff; border: 1px solid #DFE7E4; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.15s ease; color: #40524D;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="6" y="2" width="12" height="20" rx="2.5"></rect>
+                <line x1="11" y1="5" x2="13" y2="5"></line>
+              </svg>
+              <span style="font-size: 10px; font-weight: 600; color: #32433E; margin-top: 2px;">Phones</span>
+            </div>
+
+          </div>
+
+          <!-- Action Row -->
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+            <div id="finderActionBtn" onclick="launchFinderFlow()" style="background: #17181A; color: #ffffff; font-size: 11.5px; font-weight: 700; border-radius: 7px; padding: 8px 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+              <span id="finderBtnLabel">Start for TVs</span>
+              <span style="color: #00E9BF; font-size: 13px;">→</span>
+            </div>
+            <div style="font-size: 10.5px; color: #6E807A;">No sign in needed</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- LIMITED TIME DEALS (STUDIO PRODUCT PHOTOGRAPHY) -->
+      <div class="section-block-scroll">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 0 16px 10px;">
+          <div>
+            <div style="font-size: 15px; font-weight: 800; letter-spacing: -0.01em;">Limited time deals</div>
+            <div style="font-size: 10.5px; color: #DC2626; font-weight: 700; margin-top: 2px;" id="flashTimer">Ends in 06 : 42 : 18</div>
+          </div>
+          <div onclick="showToast('Showing all flash deals')" style="font-size: 11.5px; font-weight: 700; color: #00846F; cursor: pointer;">See all</div>
+        </div>
+
+        <!-- Deal Tabs -->
+        <div style="display: flex; gap: 7px; overflow-x: auto; padding: 2px 16px 12px;" id="dealsTabRow">
+          <div onclick="switchDealTab('Laptops & Computers')" class="deal-tab active" style="flex: 0 0 auto; font-size: 11px; font-weight: 700; padding: 6px 13px; border-radius: 999px; white-space: nowrap; cursor: pointer; background: #17181a; color: #ffffff; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">Laptops</div>
+          <div onclick="switchDealTab('Air Conditioners')" class="deal-tab" style="flex: 0 0 auto; font-size: 11px; font-weight: 700; padding: 6px 13px; border-radius: 999px; white-space: nowrap; cursor: pointer; background: #ffffff; color: #4f5155; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">Air Conditioners</div>
+          <div onclick="switchDealTab('Television')" class="deal-tab" style="flex: 0 0 auto; font-size: 11px; font-weight: 700; padding: 6px 13px; border-radius: 999px; white-space: nowrap; cursor: pointer; background: #ffffff; color: #4f5155; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">Televisions</div>
+          <div onclick="switchDealTab('Mobiles')" class="deal-tab" style="flex: 0 0 auto; font-size: 11px; font-weight: 700; padding: 6px 13px; border-radius: 999px; white-space: nowrap; cursor: pointer; background: #ffffff; color: #4f5155; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">Mobiles</div>
+        </div>
+
+        <!-- Deals Products Scroll -->
+        <div style="display: flex; gap: 12px; overflow-x: auto; padding: 4px 16px 8px; scroll-snap-type: x mandatory;" id="dealsProductScroll">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- OUTLET DEALS (STUDIO PRODUCT PHOTOGRAPHY) -->
+      <div class="section-block-scroll">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; padding: 0 16px 8px;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <div style="font-size: 15px; font-weight: 800; letter-spacing: -0.01em;">Outlet deals</div>
+              <div style="font-size: 8.5px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: #00846F; background: #E6FDF9; border-radius: 4px; padding: 2px 6px;">In store</div>
+            </div>
+            <div style="font-size: 10.5px; color: #6d6f73; margin-top: 2px;">Open box & display pieces at lower prices.</div>
+          </div>
+          <div onclick="showToast('Viewing all outlet items')" style="font-size: 11.5px; font-weight: 700; color: #00846F; white-space: nowrap; cursor: pointer;">See all</div>
+        </div>
+
+        <!-- Outlet Products Scroll -->
+        <div style="display: flex; gap: 12px; overflow-x: auto; padding: 4px 16px 8px; scroll-snap-type: x mandatory;" id="outletScroll">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- BESTSELLERS (STUDIO PRODUCT PHOTOGRAPHY) -->
+      <div class="section-block-scroll">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; padding: 0 16px 8px;">
+          <div style="font-size: 15px; font-weight: 800; letter-spacing: -0.01em;">Bestsellers</div>
+          <div onclick="showToast('Viewing all 50 bestsellers')" style="font-size: 11.5px; font-weight: 700; color: #00846F; cursor: pointer;">See all</div>
+        </div>
+        <div style="display: flex; gap: 12px; overflow-x: auto; padding: 4px 16px 8px; scroll-snap-type: x mandatory;" id="bestsellerScroll">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- NEW AI LAUNCHES (STUDIO PRODUCT PHOTOGRAPHY) -->
+      <div style="margin-top: 10px; padding: 18px 0 20px; background: linear-gradient(180deg, #101216 0%, #191c22 100%); color: #ffffff;">
+        <div style="padding: 0 16px 10px;">
+          <div style="display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.08); border-radius: 999px; padding: 3px 9px; margin-bottom: 6px;">
+            <div style="width: 5px; height: 5px; border-radius: 50%; background: var(--croma-teal);"></div>
+            <div style="font-size: 8.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--croma-teal);">New AI launches</div>
+          </div>
+          <div style="font-size: 16px; font-weight: 800; letter-spacing: -0.01em;">Croma's Top AI picks</div>
+          <div style="font-size: 11px; color: rgba(255,255,255,0.68); margin-top: 2px;">On device AI that does real work.</div>
+        </div>
+        <div style="display: flex; gap: 12px; overflow-x: auto; padding: 4px 16px 8px; scroll-snap-type: x mandatory;" id="aiScroll">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- BUILD YOUR HOME -->
+      <div class="section-block">
+        <div style="margin-bottom: 10px;">
+          <div style="font-size: 15px; font-weight: 800; letter-spacing: -0.01em;">Build your home with tech</div>
+          <div style="font-size: 10.5px; color: #6d6f73; margin-top: 2px;">Pick a room to explore compatible gadgets.</div>
+        </div>
+        
+        <!-- Room Tabs -->
+        <div style="display: flex; gap: 6px; overflow-x: auto; padding-bottom: 12px;" id="roomTabRow">
+          <div onclick="switchRoom('Living Room')" class="room-tab active" style="flex: 0 0 auto; font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 999px; white-space: nowrap; cursor: pointer; background: #17181a; color: #ffffff; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">Living Room</div>
+          <div onclick="switchRoom('Kitchen')" class="room-tab" style="flex: 0 0 auto; font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 999px; white-space: nowrap; cursor: pointer; background: #ffffff; color: #4f5155; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">Kitchen</div>
+          <div onclick="switchRoom('Bedroom')" class="room-tab" style="flex: 0 0 auto; font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 999px; white-space: nowrap; cursor: pointer; background: #ffffff; color: #4f5155; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">Bedroom</div>
+          <div onclick="switchRoom('Patio')" class="room-tab" style="flex: 0 0 auto; font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 999px; white-space: nowrap; cursor: pointer; background: #ffffff; color: #4f5155; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">Patio</div>
+          <div onclick="switchRoom('Garage')" class="room-tab" style="flex: 0 0 auto; font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 999px; white-space: nowrap; cursor: pointer; background: #ffffff; color: #4f5155; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">Garage</div>
+          <div onclick="switchRoom('Bathroom')" class="room-tab" style="flex: 0 0 auto; font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 999px; white-space: nowrap; cursor: pointer; background: #ffffff; color: #4f5155; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">Bathroom</div>
+        </div>
+
+        <!-- 2 Column Room Layout -->
+        <div style="display: grid; grid-template-columns: 140px 1fr; gap: 12px; align-items: start;">
+          
+          <!-- Left 140px Card (Clean Studio Photography) -->
+          <div style="border-radius: 12px; overflow: hidden; box-shadow: var(--card-shadow-lg); aspect-ratio: 3 / 4; position: relative; display: flex; align-items: flex-end; padding: 8px; background: #FAF9F6;">
+            <img id="roomCoverImg" src="assets/smart_tv_studio.jpg" alt="Room" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 12px;">
+            <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(23,24,26,0.72) 0%, transparent 50%);"></div>
+            <div style="background: rgba(255,255,255,0.96); border-radius: 7px; padding: 6px 8px; position: relative; z-index: 2; width: 100%; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+              <div id="roomTitle" style="font-size: 11px; font-weight: 800; line-height: 1.2;">The room everyone shares</div>
+              <div id="roomSub" style="font-size: 9px; color: #55585c; margin-top: 1px;">Screens, sound & air</div>
+            </div>
+          </div>
+
+          <!-- Right 2x3 Grid (Apple Style Floating Hardware) -->
+          <div id="roomCategoriesGrid" style="display: grid; grid-auto-flow: column; grid-template-rows: repeat(2, auto); gap: 12px 6px; overflow-x: auto; grid-auto-columns: 82px; padding-bottom: 6px;">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- CROMA PROMISE -->
+      <div class="section-block">
+        <div style="font-size: 13px; font-weight: 800; letter-spacing: 0.01em;">The Croma Promise</div>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+          
+          <div style="display: flex; gap: 10px; align-items: flex-start;">
+            <div style="flex: 0 0 26px; height: 26px; border-radius: 7px; background: #FFFFFF; box-shadow: 0 1px 4px rgba(0,0,0,0.07); display: flex; align-items: center; justify-content: center; font-size: 13px;">🎯</div>
+            <div style="flex: 1; min-width: 0;">
+              <div style="font-size: 12px; font-weight: 800; line-height: 1.25;">Guided buying</div>
+              <div style="font-size: 10.5px; color: #6d6f73; line-height: 1.4; margin-top: 2px;">Simplified specs & unbiased brand comparisons.</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; align-items: flex-start;">
+            <div style="flex: 0 0 26px; height: 26px; border-radius: 7px; background: #FFFFFF; box-shadow: 0 1px 4px rgba(0,0,0,0.07); display: flex; align-items: center; justify-content: center; font-size: 13px;">🏷️</div>
+            <div style="flex: 1; min-width: 0;">
+              <div style="font-size: 12px; font-weight: 800; line-height: 1.25;">Best price, guaranteed</div>
+              <div style="font-size: 10.5px; color: #6d6f73; line-height: 1.4; margin-top: 2px;">Found it cheaper elsewhere? We match it.</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; align-items: flex-start;">
+            <div style="flex: 0 0 26px; height: 26px; border-radius: 7px; background: #FFFFFF; box-shadow: 0 1px 4px rgba(0,0,0,0.07); display: flex; align-items: center; justify-content: center; font-size: 13px;">🛡️</div>
+            <div style="flex: 1; min-width: 0;">
+              <div style="font-size: 12px; font-weight: 800; line-height: 1.25;">After purchase care</div>
+              <div style="font-size: 10.5px; color: #6d6f73; line-height: 1.4; margin-top: 2px;">Warranty & repairs, even for products bought elsewhere.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- YOUR TECHNOLOGY, TOGETHER (MY TECH) -->
+      <div style="background: #f6f5f2; padding: 12px 16px 24px;">
+        <div style="position: relative; overflow: hidden; background: #1c1e21; color: #fff; border-radius: 16px; padding: 22px 18px 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.16);">
+          <div style="position: absolute; right: -90px; bottom: -110px; width: 300px; height: 300px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1);"></div>
+          <div style="position: absolute; right: -40px; bottom: -70px; width: 200px; height: 200px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1);"></div>
+          <div style="position: absolute; right: 28px; bottom: 74px; width: 22px; height: 22px; border-radius: 6px; background: var(--croma-teal); opacity: 0.9;"></div>
+          <div style="position: absolute; right: 94px; bottom: 26px; width: 22px; height: 22px; border-radius: 6px; background: #FCD34D;"></div>
+
+          <div style="position: relative; z-index: 2;">
+            <div style="font-size: 9px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--croma-teal);">Your technology, together</div>
+            <div style="font-size: 22px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.15; margin-top: 8px; max-width: 250px;">Every device. One place.</div>
+            <div style="font-size: 11.5px; color: rgba(255,255,255,0.72); line-height: 1.45; margin-top: 8px; max-width: 250px;">Keep invoices, warranties, and upgrade value inside My Tech.</div>
+            <div onclick="showToast('Opening My Tech Device Locker')" style="display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; cursor: pointer;">
+              <div style="font-size: 12px; font-weight: 800; color: #FFFFFF;">Open My Tech</div>
+              <div style="font-size: 13px; color: var(--croma-teal);">→</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-pill" id="toastPill">
+    <span id="toastText">Action completed</span>
+  </div>
+
+  <!-- Interactive Logic -->
+  <script>
+    // View Switcher
+    function setView(mode) {
+      const b = document.body;
+      const bp = document.getElementById('btnPhone');
+      const bf = document.getElementById('btnFull');
+      if (mode === 'full') {
+        b.classList.add('view-fullscreen');
+        bf.classList.add('active');
+        bp.classList.remove('active');
+      } else {
+        b.classList.remove('view-fullscreen');
+        bp.classList.add('active');
+        bf.classList.remove('active');
+      }
+    }
+
+    // Toast
+    let tTimer;
+    function showToast(txt) {
+      const p = document.getElementById('toastPill');
+      const t = document.getElementById('toastText');
+      if (!p || !t) return;
+      t.textContent = txt;
+      p.classList.add('show');
+      clearTimeout(tTimer);
+      tTimer = setTimeout(() => p.classList.remove('show'), 2000);
+    }
+
+    // Store Modal
+    function toggleStoreModal() {
+      const d = document.getElementById('storeDropdown');
+      d.style.display = (d.style.display === 'none' || !d.style.display) ? 'block' : 'none';
+    }
+
+    // Cart Drawer Toggle
+    let cartCount = 2;
+    function toggleCartDrawer() {
+      showToast(`Cart has ${cartCount} items · 2-Hr Delivery Ready`);
+    }
+
+    // Wishlist Toggle
+    function toggleWish(el, name) {
+      el.classList.toggle('active');
+      const isAct = el.classList.contains('active');
+      el.textContent = isAct ? '♥' : '♡';
+      showToast(isAct ? `Saved to Wishlist` : `Removed from Wishlist`);
+    }
+
+    // Carousel Slider
+    let currentSlide = 0;
+    const totalSlides = 4;
+    function updateSlide() {
+      const s = document.getElementById('carouselSlider');
+      if (s) s.style.transform = `translateX(-${currentSlide * 100}%)`;
+      for (let i = 0; i < 4; i++) {
+        const dot = document.getElementById(`dot${i}`);
+        if (dot) {
+          dot.style.width = (i === currentSlide) ? '18px' : '5px';
+          dot.style.background = (i === currentSlide) ? '#17181a' : '#d5d4cf';
+        }
+      }
+    }
+
+    function setSlide(i) {
+      currentSlide = i;
+      updateSlide();
+    }
+
+    setInterval(() => {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateSlide();
+    }, 5000);
+
+    // Live Ticking Countdown
+    let secs = 6 * 3600 + 42 * 60 + 18;
+    function tickTimer() {
+      secs--;
+      if (secs < 0) secs = 8 * 3600;
+      const h = String(Math.floor(secs / 3600)).padStart(2, '0');
+      const m = String(Math.floor((secs % 3600) / 60)).padStart(2, '0');
+      const s = String(secs % 60).padStart(2, '0');
+      const el = document.getElementById('flashTimer');
+      if (el) el.textContent = `Ends in ${h} : ${m} : ${s}`;
+    }
+    setInterval(tickTimer, 1000);
+
+    // HELP ME CHOOSE INTERACTIVE LOGIC
+    let selectedFinderCat = 'TVs';
+    function pickFinderCat(el, cat) {
+      selectedFinderCat = cat;
+      document.querySelectorAll('#hmcGridContainer .finder-tile').forEach(t => {
+        t.style.background = '#ffffff';
+        t.style.border = '1px solid #DFE7E4';
+        t.style.color = '#40524D';
+        const span = t.querySelector('span');
+        if (span) {
+          span.style.color = '#32433E';
+          span.style.fontWeight = '600';
+        }
+      });
+      el.style.background = '#17181A';
+      el.style.border = '1px solid #17181A';
+      el.style.color = '#00E9BF';
+      const activeSpan = el.querySelector('span');
+      if (activeSpan) {
+        activeSpan.style.color = '#ffffff';
+        activeSpan.style.fontWeight = '700';
+      }
+      
+      const lbl = document.getElementById('finderBtnLabel');
+      if (lbl) {
+        lbl.textContent = `Start for ${cat}`;
+      }
+    }
+
+    function launchFinderFlow() {
+      showToast(`Starting 2 step guide for ${selectedFinderCat}...`);
+    }
+
+    // REAL STUDIO PRODUCT CATALOG
+    const DEALS = {
+      'Laptops & Computers': [
+        { rank: '#1', name: 'HP Pavilion 15 · Core i5, 16GB', badge: 'Diwali deal', price: '₹58,990', mrp: '₹79,999', off: 'Save ₹21,009 · No Cost EMI', img: 'assets/laptop_studio.jpg' },
+        { rank: '#2', name: 'Lenovo IdeaPad Slim 3 · Ryzen 5', badge: 'Diwali deal', price: '₹41,490', mrp: '₹62,890', off: 'Save ₹21,400 · ₹2,000 off', img: 'assets/laptop_studio.jpg' },
+        { rank: '#3', name: 'ASUS Vivobook 14 · Core i3', badge: 'Few left', price: '₹32,990', mrp: '₹47,990', off: 'Save ₹15,000 · Pickup today', img: 'assets/laptop_studio.jpg' },
+        { rank: '#4', name: 'Acer Aspire Lite · Core i5, 15.6"', badge: 'Diwali deal', price: '₹36,990', mrp: '₹54,999', off: 'Save ₹18,009 · Free bag', img: 'assets/laptop_studio.jpg' }
+      ],
+      'Air Conditioners': [
+        { rank: '#1', name: 'Croma 1.5 Ton 3★ Inverter AC', badge: 'Diwali deal', price: '₹28,990', mrp: '₹44,900', off: 'Save ₹15,910 · Free setup', img: 'assets/split_ac_studio.jpg' },
+        { rank: '#2', name: 'Voltas 1.5 Ton 5★ Inverter AC', badge: 'Diwali deal', price: '₹36,490', mrp: '₹58,990', off: 'Save ₹22,500 · 48-Hr setup', img: 'assets/split_ac_studio.jpg' },
+        { rank: '#3', name: 'Daikin 1 Ton 3★ Copper AC', badge: 'Few left', price: '₹31,990', mrp: '₹46,500', off: 'Save ₹14,510 · 2 units left', img: 'assets/split_ac_studio.jpg' },
+        { rank: '#4', name: 'LG 1.5 Ton 5★ AI Dual Inverter', badge: 'Diwali deal', price: '₹42,990', mrp: '₹61,990', off: 'Save ₹19,000 · ₹4,000 exch.', img: 'assets/split_ac_studio.jpg' }
+      ],
+      'Television': [
+        { rank: '#1', name: 'Samsung 55" Crystal 4K UHD TV', badge: 'Diwali deal', price: '₹44,990', mrp: '₹69,900', off: 'Save ₹24,910 · Free mount', img: 'assets/smart_tv_studio.jpg' },
+        { rank: '#2', name: 'LG 43" 4K UHD Smart TV', badge: 'Diwali deal', price: '₹29,990', mrp: '₹47,990', off: 'Save ₹18,000 · Next day del.', img: 'assets/smart_tv_studio.jpg' },
+        { rank: '#3', name: 'Sony Bravia 65" 4K Google TV', badge: 'Few left', price: '₹89,990', mrp: '₹1,39,900', off: 'Save ₹49,910 · EMI ₹4,257', img: 'assets/smart_tv_studio.jpg' },
+        { rank: '#4', name: 'Croma 32" HD Ready Smart TV', badge: 'Diwali deal', price: '₹9,499', mrp: '₹16,990', off: 'Save ₹7,491 · Under ₹10k', img: 'assets/smart_tv_studio.jpg' }
+      ],
+      'Mobiles': [
+        { rank: '#1', name: 'Samsung Galaxy S24 5G · 256GB', badge: 'Diwali deal', price: '₹64,999', mrp: '₹79,999', off: 'Save ₹15,000 · ₹5,000 card off', img: 'assets/phone_studio.jpg' },
+        { rank: '#2', name: 'Apple iPhone 15 · 128GB, Blue', badge: 'Diwali deal', price: '₹62,900', mrp: '₹79,900', off: 'Save ₹17,000 · ₹22k exchange', img: 'assets/phone_studio.jpg' },
+        { rank: '#3', name: 'OnePlus 13R 5G · 256GB', badge: 'Few left', price: '₹39,999', mrp: '₹44,999', off: 'Save ₹5,000 · 2-Hr Pickup', img: 'assets/phone_studio.jpg' },
+        { rank: '#4', name: 'Nothing Phone (2a) · 128GB', badge: 'Diwali deal', price: '₹19,999', mrp: '₹25,999', off: 'Save ₹6,000 · EMI ₹1,667', img: 'assets/phone_studio.jpg' }
+      ]
+    };
+
+    let activeDealTab = 'Laptops & Computers';
+    function renderDealsList() {
+      const container = document.getElementById('dealsProductScroll');
+      if (!container) return;
+      const items = DEALS[activeDealTab] || DEALS['Laptops & Computers'];
+      container.innerHTML = items.map(p => `
+        <div style="flex: 0 0 152px; scroll-snap-align: start; cursor: pointer;" onclick="showToast('Viewing ${p.name}')">
+          <div class="deal-img-box">
+            <img src="${p.img}" alt="${p.name}" loading="lazy">
+            <div style="position: absolute; top: 7px; left: 7px; background: #17181a; color: #fff; font-size: 9.5px; font-weight: 800; padding: 2px 6px; border-radius: 4px;">${p.rank}</div>
+            <div class="wish-heart" onclick="event.stopPropagation(); toggleWish(this, '${p.name}')">♡</div>
+          </div>
+          <div class="text-truncate-2" style="font-size: 11.5px; font-weight: 700; margin-top: 8px; height: 32px; color: #17181a;" title="${p.name}">${p.name}</div>
+          <div style="margin-top: 4px;">
+            <span style="font-size: 9px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: #DC2626; background: #fdeeea; border-radius: 3px; padding: 2px 5px;">${p.badge}</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 6px; margin-top: 5px;">
+            <div style="font-size: 14px; font-weight: 800; color: #17181a;">${p.price}</div>
+            <div style="font-size: 11px; color: #8a8c90; text-decoration: line-through;">${p.mrp}</div>
+          </div>
+          <div class="text-truncate-1" style="font-size: 10px; color: #00846F; font-weight: 700; margin-top: 2px;">${p.off}</div>
+        </div>
+      `).join('');
+    }
+
+    function switchDealTab(tabName) {
+      activeDealTab = tabName;
+      document.querySelectorAll('#dealsTabRow .deal-tab').forEach(t => {
+        const isMatch = t.getAttribute('onclick').includes(tabName);
+        t.style.background = isMatch ? '#17181a' : '#ffffff';
+        t.style.color = isMatch ? '#ffffff' : '#4f5155';
+        t.style.boxShadow = isMatch ? '0 2px 5px rgba(0,0,0,0.15)' : '0 1px 3px rgba(0,0,0,0.06)';
+      });
+      renderDealsList();
+    }
+
+    function pickCategory(tabName) {
+      const dealsSec = document.getElementById('dealsTabRow');
+      if (dealsSec) dealsSec.scrollIntoView({ behavior: 'smooth' });
+      switchDealTab(tabName);
+    }
+
+    // OUTLET DATA
+    const OUTLET = [
+      { tag: 'In store', name: 'LG 55" 4K UHD Smart TV', condition: 'Open box · Full warranty', price: '₹36,490', online: '₹47,990', stock: '⚡ 2 units left', img: 'assets/smart_tv_studio.jpg' },
+      { tag: 'In store', name: 'Samsung 1.5 Ton 3★ Split AC', condition: 'Display piece · 1 yr wty', price: '₹25,990', online: '₹38,990', stock: '⚡ 1 unit left', img: 'assets/split_ac_studio.jpg' },
+      { tag: 'In store', name: 'Bosch 7 kg Front Load Washer', condition: 'Open box · Full warranty', price: '₹27,490', online: '₹36,900', stock: '⚡ 3 units left', img: 'assets/washer_studio.jpg' },
+      { tag: 'In store', name: 'Sony Wireless ANC Earbuds', condition: 'Ex demo · 6 mo warranty', price: '₹14,990', online: '₹19,990', stock: '⚡ 2 units left', img: 'assets/earbuds_studio.jpg' }
+    ];
+
+    function renderOutletList() {
+      const container = document.getElementById('outletScroll');
+      if (!container) return;
+      container.innerHTML = OUTLET.map(p => `
+        <div style="flex: 0 0 152px; scroll-snap-align: start; cursor: pointer;" onclick="showToast('Reserved ${p.name}')">
+          <div class="deal-img-box">
+            <img src="${p.img}" alt="${p.name}" loading="lazy">
+            <div style="position: absolute; top: 7px; left: 7px; background: #00846F; color: #fff; font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 4px;">${p.tag}</div>
+          </div>
+          <div class="text-truncate-2" style="font-size: 11.5px; font-weight: 700; margin-top: 8px; height: 32px; color: #17181a;">${p.name}</div>
+          <div class="text-truncate-1" style="font-size: 9.5px; font-weight: 700; color: #6d6f73; text-transform: uppercase; margin-top: 3px;">${p.condition}</div>
+          <div style="display: flex; align-items: baseline; gap: 6px; margin-top: 5px;">
+            <div style="font-size: 14px; font-weight: 800; color: #17181a;">${p.price}</div>
+            <div style="font-size: 11px; color: #8a8c90; text-decoration: line-through;">${p.online}</div>
+          </div>
+          <div style="font-size: 10px; color: #00846F; font-weight: 700; margin-top: 2px;">${p.stock}</div>
+        </div>
+      `).join('');
+    }
+
+    // BESTSELLERS DATA (STUDIO PHOTOGRAPHY)
+    const BESTSELLERS = [
+      { name: 'Samsung 55" Crystal 4K Smart TV', rating: '4.5', reviews: '2.1k', price: '₹44,990', mrp: '₹69,900', img: 'assets/smart_tv_studio.jpg' },
+      { name: 'Croma 9 kg Front Load Washer', rating: '4.3', reviews: '862', price: '₹32,490', mrp: '₹46,900', img: 'assets/washer_studio.jpg' },
+      { name: 'Aether Pro ANC Wireless Earbuds', rating: '4.2', reviews: '11k', price: '₹2,499', mrp: '₹5,990', img: 'assets/earbuds_studio.jpg' },
+      { name: 'Cuisine French Door Smart Fridge', rating: '4.4', reviews: '1.4k', price: '₹74,990', mrp: '₹98,300', img: 'assets/fridge_studio.jpg' },
+      { name: 'Titanium Smartwatch Sport GPS', rating: '4.7', reviews: '3.2k', price: '₹24,900', mrp: '₹29,900', img: 'assets/smartwatch_studio.jpg' }
+    ];
+
+    function renderBestsellersList() {
+      const container = document.getElementById('bestsellerScroll');
+      if (!container) return;
+      container.innerHTML = BESTSELLERS.map(p => `
+        <div style="flex: 0 0 152px; scroll-snap-align: start; cursor: pointer;" onclick="showToast('Viewing ${p.name}')">
+          <div class="deal-img-box">
+            <img src="${p.img}" alt="${p.name}" loading="lazy">
+            <div class="wish-heart" onclick="event.stopPropagation(); toggleWish(this, '${p.name}')">♡</div>
+          </div>
+          <div class="text-truncate-2" style="font-size: 11.5px; font-weight: 700; margin-top: 8px; height: 32px; color: #17181a;">${p.name}</div>
+          <div style="font-size: 10px; color: #6d6f73; margin-top: 3px;">★ ${p.rating} (${p.reviews})</div>
+          <div style="display: flex; align-items: baseline; gap: 6px; margin-top: 5px;">
+            <div style="font-size: 14px; font-weight: 800; color: #17181a;">${p.price}</div>
+            <div style="font-size: 11px; color: #8a8c90; text-decoration: line-through;">${p.mrp}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // AI PICKS DATA (STUDIO PHOTOGRAPHY)
+    const AI_PICKS = [
+      { rank: '#1', name: 'Samsung Galaxy S25 Ultra 5G', feature: 'Live call translate', value: 'Speaks your side in another language live.', price: '₹1,29,999', img: 'assets/phone_studio.jpg' },
+      { rank: '#2', name: 'LG 9 kg AI Front Load Washer', feature: 'AI fabric sensing', value: 'Sets a gentler wash so fabrics last longer.', price: '₹42,990', img: 'assets/washer_studio.jpg' },
+      { rank: '#3', name: 'Samsung Bespoke AI Hub Fridge', feature: 'AI Vision Inside', value: 'Notifies what you store before it spoils.', price: '₹1,84,900', img: 'assets/fridge_studio.jpg' },
+      { rank: '#4', name: 'Dell XPS 14 Copilot+ PC', feature: 'On device AI (45 TOPS)', value: 'Local AI tasks executed off the cloud.', price: '₹1,49,990', img: 'assets/laptop_studio.jpg' },
+      { rank: '#5', name: 'Sony Bravia 9 65" Mini LED', feature: 'XR AI upscaling', value: 'Enhances standard streams close to 4K live.', price: '₹3,29,990', img: 'assets/smart_tv_studio.jpg' }
+    ];
+
+    function renderAIList() {
+      const container = document.getElementById('aiScroll');
+      if (!container) return;
+      container.innerHTML = AI_PICKS.map(p => `
+        <div style="flex: 0 0 166px; scroll-snap-align: start; background: rgba(255,255,255,0.06); border-radius: 12px; padding: 9px; cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,0.2);" onclick="showToast('Viewing ${p.name}')">
+          <div style="position: relative; border-radius: 8px; background: rgba(255,255,255,0.06); aspect-ratio: 1; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 5px;">
+            <img src="${p.img}" alt="${p.name}" style="max-width: 88%; max-height: 88%; object-fit: contain;">
+            <div style="position: absolute; top: 6px; left: 6px; background: var(--croma-teal); color: #0c0e11; font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 4px;">${p.rank}</div>
+          </div>
+          <div class="text-truncate-1" style="font-size: 11.5px; font-weight: 700; margin-top: 8px; color: #fff;">${p.name}</div>
+          <div style="font-size: 9.5px; font-weight: 800; color: var(--croma-teal); margin-top: 2px;">${p.feature}</div>
+          <div class="text-truncate-2" style="font-size: 10px; color: rgba(255,255,255,0.68); margin-top: 3px; height: 26px;">${p.value}</div>
+          <div style="font-size: 13.5px; font-weight: 800; margin-top: 5px; color:#fff;">${p.price}</div>
+        </div>
+      `).join('');
+    }
+
+    // ROOMS DATA (CLEAN STUDIO PHOTOGRAPHY · NO TEXT)
+    const ROOMS = {
+      'Living Room': {
+        img: 'assets/smart_tv_studio.jpg',
+        title: 'The room everyone shares',
+        sub: 'Screens, sound & air',
+        cats: [
+          { label: 'Televisions', img: 'assets/smart_tv_float.png' },
+          { label: 'Soundbars', img: 'assets/earbuds_float.png' },
+          { label: 'Smartwatch', img: 'assets/smartwatch_float.png' },
+          { label: 'Air Purifiers', img: 'assets/split_ac_float.png' },
+          { label: 'Tablets', img: 'assets/tablet_float.png' },
+          { label: 'TV Mounts', img: 'assets/smart_tv_float.png' }
+        ]
+      },
+      'Kitchen': {
+        img: 'assets/fridge_studio.jpg',
+        title: 'Cook faster, waste less',
+        sub: 'Prep, cook & store',
+        cats: [
+          { label: 'Refrigerators', img: 'assets/fridge_float.png' },
+          { label: 'Microwaves', img: 'assets/fridge_float.png' },
+          { label: 'Mixers', img: 'assets/washer_float.png' },
+          { label: 'Dishwashers', img: 'assets/washer_float.png' },
+          { label: 'Air Fryers', img: 'assets/fridge_float.png' },
+          { label: 'Chimneys', img: 'assets/split_ac_float.png' }
+        ]
+      },
+      'Bedroom': {
+        img: 'assets/split_ac_studio.jpg',
+        title: 'Sleep cool, wake charged',
+        sub: 'Cooling & quiet comfort',
+        cats: [
+          { label: 'Split ACs', img: 'assets/split_ac_float.png' },
+          { label: 'Air Coolers', img: 'assets/split_ac_float.png' },
+          { label: 'Smartwatch', img: 'assets/smartwatch_float.png' },
+          { label: 'Headphones', img: 'assets/earbuds_float.png' },
+          { label: 'Tablets', img: 'assets/tablet_float.png' },
+          { label: 'Smart Fans', img: 'assets/split_ac_float.png' }
+        ]
+      },
+      'Patio': {
+        img: 'assets/earbuds_studio.jpg',
+        title: 'Make the balcony count',
+        sub: 'Sound, light & security',
+        cats: [
+          { label: 'Party Speakers', img: 'assets/earbuds_float.png' },
+          { label: 'Smartwatch', img: 'assets/smartwatch_float.png' },
+          { label: 'Mobiles', img: 'assets/phone_float.png' },
+          { label: 'Electric Grills', img: 'assets/fridge_float.png' },
+          { label: 'Power Banks', img: 'assets/tablet_float.png' },
+          { label: 'Insect Killers', img: 'assets/split_ac_float.png' }
+        ]
+      },
+      'Garage': {
+        img: 'assets/washer_studio.jpg',
+        title: 'Power and upkeep',
+        sub: 'Charge, clean & fix',
+        cats: [
+          { label: 'EV Chargers', img: 'assets/split_ac_float.png' },
+          { label: 'Vacuums', img: 'assets/washer_float.png' },
+          { label: 'Inverters', img: 'assets/laptop_float.png' },
+          { label: 'Power Tools', img: 'assets/washer_float.png' },
+          { label: 'Washers', img: 'assets/washer_float.png' },
+          { label: 'Tyre Inflators', img: 'assets/phone_float.png' }
+        ]
+      },
+      'Bathroom': {
+        img: 'assets/split_ac_studio.jpg',
+        title: 'Small space, real upgrades',
+        sub: 'Hot water & grooming',
+        cats: [
+          { label: 'Geysers', img: 'assets/split_ac_float.png' },
+          { label: 'Trimmers', img: 'assets/smartwatch_float.png' },
+          { label: 'Hair Dryers', img: 'assets/earbuds_float.png' },
+          { label: 'Washers', img: 'assets/washer_float.png' },
+          { label: 'Toothbrushes', img: 'assets/smartwatch_float.png' },
+          { label: 'Fans', img: 'assets/split_ac_float.png' }
+        ]
+      }
+    };
+
+    let activeRoom = 'Living Room';
+    function renderRoomView() {
+      const data = ROOMS[activeRoom] || ROOMS['Living Room'];
+      const img = document.getElementById('roomCoverImg');
+      const title = document.getElementById('roomTitle');
+      const sub = document.getElementById('roomSub');
+      const grid = document.getElementById('roomCategoriesGrid');
+
+      if (img) img.src = data.img;
+      if (title) title.textContent = data.title;
+      if (sub) sub.textContent = data.sub;
+
+      if (grid) {
+        grid.innerHTML = data.cats.map(c => `
+          <div class="apple-cat-item" onclick="showToast('Browsing ${c.label}')">
+            <div class="apple-cat-stage" style="height: 58px;">
+              <img src="${c.img}" alt="${c.label}" style="max-height: 46px;">
+              <div class="apple-cat-ground-shadow" style="width: 44px;"></div>
+            </div>
+            <div class="text-truncate-1 apple-cat-title" style="font-size: 10.5px;">${c.label}</div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function switchRoom(roomName) {
+      activeRoom = roomName;
+      document.querySelectorAll('#roomTabRow .room-tab').forEach(t => {
+        const isMatch = t.getAttribute('onclick').includes(roomName);
+        t.style.background = isMatch ? '#17181a' : '#ffffff';
+        t.style.color = isMatch ? '#ffffff' : '#4f5155';
+        t.style.boxShadow = isMatch ? '0 2px 5px rgba(0,0,0,0.15)' : '0 1px 3px rgba(0,0,0,0.06)';
+      });
+      renderRoomView();
+    }
+
+    // Initialize All Sections
+    document.addEventListener('DOMContentLoaded', () => {
+      renderDealsList();
+      renderOutletList();
+      renderBestsellersList();
+      renderAIList();
+      renderRoomView();
+    });
+  </script>
+</body>
+</html>

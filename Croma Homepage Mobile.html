@@ -280,6 +280,22 @@
       padding: 18px 0 20px;
     }
 
+    .product-scroll-row {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 6px 16px 14px 16px !important;
+      scroll-snap-type: x proximity;
+      scroll-padding-left: 16px;
+      scroll-padding-right: 16px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .product-scroll-row::-webkit-scrollbar {
+      display: none;
+    }
+
     /* Toast */
     .toast-pill {
       position: fixed;
@@ -695,7 +711,7 @@
         </div>
 
         <!-- Deals Products Scroll -->
-        <div style="display: flex; gap: 12px; overflow-x: auto; padding: 4px 16px 8px; scroll-snap-type: x mandatory;" id="dealsProductScroll">
+        <div class="product-scroll-row" id="dealsProductScroll">
           <!-- Populated by JS -->
         </div>
       </div>
@@ -714,7 +730,7 @@
         </div>
 
         <!-- Outlet Products Scroll -->
-        <div style="display: flex; gap: 12px; overflow-x: auto; padding: 4px 16px 8px; scroll-snap-type: x mandatory;" id="outletScroll">
+        <div class="product-scroll-row" id="outletScroll">
           <!-- Populated by JS -->
         </div>
       </div>
@@ -725,7 +741,7 @@
           <div style="font-size: 15px; font-weight: 800; letter-spacing: -0.01em;">Bestsellers</div>
           <div onclick="showToast('Viewing all 50 bestsellers')" style="font-size: 11.5px; font-weight: 700; color: #00846F; cursor: pointer;">See all</div>
         </div>
-        <div style="display: flex; gap: 12px; overflow-x: auto; padding: 4px 16px 8px; scroll-snap-type: x mandatory;" id="bestsellerScroll">
+        <div class="product-scroll-row" id="bestsellerScroll">
           <!-- Populated by JS -->
         </div>
       </div>
@@ -740,7 +756,7 @@
           <div style="font-size: 16px; font-weight: 800; letter-spacing: -0.01em;">Croma's Top AI picks</div>
           <div style="font-size: 11px; color: rgba(255,255,255,0.68); margin-top: 2px;">On device AI that does real work.</div>
         </div>
-        <div style="display: flex; gap: 12px; overflow-x: auto; padding: 4px 16px 8px; scroll-snap-type: x mandatory;" id="aiScroll">
+        <div class="product-scroll-row" id="aiScroll">
           <!-- Populated by JS -->
         </div>
       </div>
@@ -995,6 +1011,7 @@
     function renderDealsList() {
       const container = document.getElementById('dealsProductScroll');
       if (!container) return;
+      container.scrollLeft = 0;
       const items = DEALS[activeDealTab] || DEALS['Laptops & Computers'];
       container.innerHTML = items.map(p => `
         <div style="flex: 0 0 152px; scroll-snap-align: start; cursor: pointer;" onclick="showToast('Viewing ${p.name}')">
@@ -1044,6 +1061,7 @@
     function renderOutletList() {
       const container = document.getElementById('outletScroll');
       if (!container) return;
+      container.scrollLeft = 0;
       container.innerHTML = OUTLET.map(p => `
         <div style="flex: 0 0 152px; scroll-snap-align: start; cursor: pointer;" onclick="showToast('Reserved ${p.name}')">
           <div class="deal-img-box">
@@ -1073,6 +1091,7 @@
     function renderBestsellersList() {
       const container = document.getElementById('bestsellerScroll');
       if (!container) return;
+      container.scrollLeft = 0;
       container.innerHTML = BESTSELLERS.map(p => `
         <div style="flex: 0 0 152px; scroll-snap-align: start; cursor: pointer;" onclick="showToast('Viewing ${p.name}')">
           <div class="deal-img-box">
@@ -1101,6 +1120,7 @@
     function renderAIList() {
       const container = document.getElementById('aiScroll');
       if (!container) return;
+      container.scrollLeft = 0;
       container.innerHTML = AI_PICKS.map(p => `
         <div style="flex: 0 0 166px; scroll-snap-align: start; background: rgba(255,255,255,0.06); border-radius: 12px; padding: 9px; cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,0.2);" onclick="showToast('Viewing ${p.name}')">
           <div style="position: relative; border-radius: 8px; background: rgba(255,255,255,0.06); aspect-ratio: 1; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 5px;">
